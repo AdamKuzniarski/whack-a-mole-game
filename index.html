@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta author="Adam Kuzniarski" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whack-a-Mole Game</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="/assets/js/script.js" defer type="module"></script>
+  </head>
+  <body>
+    <div id="game-container">
+        
+
+            <div id="board">
+                <div>
+                <button class="hole" type="button" data-index="0">1</button>
+                <button class="hole" type="button" data-index="1">2</button>
+                <button class="hole" type="button" data-index="2">3</button>
+                </div>
+                <div>
+                    <button class="hole" type="button" data-index="3">4</button>
+                    <button class="hole" type="button" data-index="4">5</button>
+                    <button class="hole" type="button" data-index="5">6</button>
+                </div>
+                <div>
+                    <button class="hole" type="button" data-index="6">7</button>
+                    <button class="hole" type="button" data-index="7">8</button>
+                    <button class="hole" type="button" data-index="8">9</button>
+                </div>
+            
+        </div>
+      <div><span>Score: </span><span id="scoreValue">0</span></div>
+      <div><span>Time: </span><span id="timeValue">0:30 sec</span></div>
+      <button id="start-button" type="button">Start</button>
+      <button id="stop-button" type="button">Stop</button>
+    </div>
+  </body>
+</html>
