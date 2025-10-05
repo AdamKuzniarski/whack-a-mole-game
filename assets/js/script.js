@@ -10,6 +10,10 @@ const STATE = {
   timerInterval: null,
 };
 
+const activeElement =
+  STATE.activeIndex !== null ? holes[STATE.activeIndex] : null;
+const hasActive = activeElement !== null;
+
 const gameContainer = document.getElementById("game-container");
 const boardEl = document.getElementById("board");
 const holes = document.querySelectorAll(".hole");
@@ -55,14 +59,15 @@ function hide() {
 function tick() {
   if (!STATE.isRunning) return;
   if (STATE.isRunning) {
+    const newIndex = getRandomIndex(STATE.lastIndex);
+    if (STATE.activeIndex !== null) {
+      holes[STATE.activeIndex].classList.remove("active");
+    }
     const holesElement = holes[newIndex];
     holesElement = getRandomIndex(STATE.lastIndex);
-    STATE.activeIndex !== null
-      ? holes[STATE.activeIndex].classList.remove("active")
-      : null;
     holesElement.classList.add("active");
-    STATE.activeIndex = holesElement;
-    STATE.lastIndex = holesElement;
+    STATE.lastIndex = newIndex;
+    STATE.activeIndex = newIndex;
     STATE.canHit = true;
     STATE.hideTimeout = setTimeout(hide, 850);
   }
