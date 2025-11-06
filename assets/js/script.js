@@ -24,6 +24,10 @@ const timeValue = document.getElementById("timeValue");
 const startButton = document.getElementById("start-button");
 const stopButton = document.getElementById("stop-button");
 
+startButton.addEventListener("click", startGame);
+stopButton.addEventListener("click", stopGame);
+boardEl.addEventListener('click', onBoardClick);
+
 function getRandomIndex(excludeIndex) {
   const totalHoles = holes.length;
   if (excludeIndex === undefined || excludeIndex === null) {
@@ -62,7 +66,6 @@ function startGame() {
   scheduleNextTick();
 }
 
-startButton.addEventListener("click", startGame);
 
 
 
@@ -106,6 +109,7 @@ function hide() {
   STATE.canHit = false;
   scheduleNextTick();
 }
+
 function scheduleNextTick() {
   if (!STATE.isRunning) return;
   const nextTickIn = PAUSE_MIN_MS + Math.floor(Math.random() * ( PAUSE_MAX_MS - PAUSE_MIN_MS));
@@ -131,24 +135,22 @@ function stopGame() {
   gameContainer.classList.remove("is-running")
 }
 
-stopButton.addEventListener("click", stopGame);
 
 
 function onBoardClick(event){
- if(!STATE.isRunning) return ;
-
-const hole = event.target.closest('.hole');
-if(!hole) return;
-
-const index = Number(hole.dataset.index);
-if(!Number.isInteger(index)) return;
-
-const isActive = STATE.activeIndex === index;
-if(!isActive || !STATE.canHit) return;
- 
-STATE.score += 1;
-scoreValue.textContent = STATE.score;
-STATE.canHit =false;
+  if(!STATE.isRunning) return ;
+  
+  const hole = event.target.closest('.hole');
+  if(!hole) return;
+  
+  const index = Number(hole.dataset.index);
+  if(!Number.isInteger(index)) return;
+  
+  const isActive = STATE.activeIndex === index;
+  if(!isActive || !STATE.canHit) return;
+  
+  STATE.score += 1;
+  scoreValue.textContent = STATE.score;
+  STATE.canHit =false;
 }
 
-boardEl.addEventListener('click', onBoardClick)
