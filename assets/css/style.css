@@ -1,9 +1,20 @@
 
 
+:root{
+  --px: 8px;                /* größer = mehr NES-Feeling */
+  --fur: #7b523f;
+  --fur-dark: #5a3a2b;
+  --eye: #ffffff;
+  --pupil: #000000;
+  --nose: #ff7aa2;
+  --line: #000000;
+}
+
 body { 
   font-family: "Trebuchet MS", Arial, sans-serif;
   background: #c0c0c0;
 }
+
 
 #board > div {
   display: contents;
