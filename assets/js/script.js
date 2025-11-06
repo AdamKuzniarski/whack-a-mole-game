@@ -40,14 +40,15 @@ function startGame() {
 
   STATE.isRunning = true;
   STATE.score = 0;
-  STATE.timeLeft = `${STATE.timeLeft} sec`;
+  STATE.timeLeft = STATE.timeLeft;
   STATE.activeIndex = null;
   STATE.lastIndex = null;
   STATE.canHit = false;
 
   scoreValue.textContent = STATE.score;
   timeValue.textContent = STATE.timeLeft;
-  timeValue.textContent = `${STATE.timeLeft} sec`;
+  timeValue.textContent = `${STATE.timeLeft}`;
+
   //Board reset
   holes.forEach((hole) => hole.classList.remove("active"));
   clearTimeout(STATE.hideTimeout);
@@ -79,16 +80,19 @@ function tick() {
 }
 
 function hide() {
-  if (STATE.isRunning === null) {
+  if (!STATE.isRunning ) return
+
+  
+  if( STATE.activeIndex !== null){
     holes[STATE.activeIndex].classList.remove("active");
   }
-  STATE.activeIndex = null;
+  STATE.activeIndex = null
   STATE.canHit = false;
   scheduleNextTick();
 }
 function scheduleNextTick() {
   if (!STATE.isRunning) return;
-  const nextTickIn = PAUSE_MIN_MS + Math.floor(Math.random() * PAUSE_MAX_MS);
+  const nextTickIn = PAUSE_MIN_MS + Math.floor(Math.random() * ( PAUSE_MAX_MS - PAUSE_MIN_MS));
   STATE.loopTimeout = setTimeout(tick, nextTickIn);
 }
 
@@ -106,3 +110,18 @@ function stopGame() {
   stopButton.disabled = true;
 }
 stopButton.addEventListener("click", stopGame);
+
+function onBoardClick(){
+ if(!STATE.isRunning) return ;
+
+const hole = event.target.closest('.hole');
+if(!hole) return;
+
+const index = Number(hole.dataset.index);
+if(!Number.isInteger(index)) return;
+
+ if(STATE.activeIndex === null) return
+ 
+}
+
+boardEl.addEventListener('click', onBoardClick)
